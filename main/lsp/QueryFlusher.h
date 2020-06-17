@@ -11,8 +11,8 @@ public:
     QueryFlusher() = default;
     ~QueryFlusher() = default;
 
-    void flushErrors(spdlog::logger &logger, std::vector<std::unique_ptr<core::ErrorQueueMessage>> errors,
-                     const core::GlobalState &gs, core::FileRef file) override;
+    void flushErrors(spdlog::logger &logger, const core::GlobalState &gs, core::FileRef file,
+                     std::vector<std::unique_ptr<core::ErrorQueueMessage>> errors) override;
 };
 
 } // namespace sorbet::realmain::lsp

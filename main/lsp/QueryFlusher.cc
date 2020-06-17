@@ -26,8 +26,8 @@ u2 getQueryResponseTypeSpecificity(const core::lsp::QueryResponse &q) {
     }
 }
 } // namespace
-void QueryFlusher::flushErrors(spdlog::logger &logger, vector<unique_ptr<core::ErrorQueueMessage>> errors,
-                               const core::GlobalState &gs, core::FileRef file) {
+void QueryFlusher::flushErrors(spdlog::logger &logger, const core::GlobalState &gs, core::FileRef file,
+                               vector<unique_ptr<core::ErrorQueueMessage>> errors) {
     for (auto &error : errors) {
         if (error->kind == core::ErrorQueueMessage::Kind::QueryResponse) {
             queryResponses.emplace_back(move(error->queryResponse));

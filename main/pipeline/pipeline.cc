@@ -983,9 +983,11 @@ ast::ParsedFilesOrCancelled typecheck(unique_ptr<core::GlobalState> &gs, vector<
                                                            file.data(igs).path());
                                     }
                                     // Stream out errors
-                                    threadResult.counters = getAndClearThreadCounters();
-                                    resultq->push(move(threadResult), processedByThread);
-                                    processedByThread = 0;
+                                    if (processedByThread >= 10) {
+                                        threadResult.counters = getAndClearThreadCounters();
+                                        resultq->push(move(threadResult), processedByThread);
+                                        processedByThread = 0;
+                                    }
                                 }
                             }
                         }
